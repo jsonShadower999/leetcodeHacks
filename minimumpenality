@@ -1,0 +1,30 @@
+class Solution:
+    # n # shop open no cust
+    # y# 
+   
+    def bestClosingTime(self, customers: str) -> int:
+       #count no of customers coming 
+        count_customers=0
+        ans=1000
+        for i in customers:
+           if(i=='Y'):
+               count_customers+1
+        curropen=0 #having a customer 
+        currclose=0  #have no customers
+        hour=0
+        for i in range (len(customers)):
+            currpenality=count_customers-curropen+currclose
+            if(currpenality<ans):
+                ans=currpenality
+                hour=i
+            if(customers[i]=='Y'):
+                curropen=curropen+1
+            elif(customers[i]=='N'):
+                currclose=currclose+1
+        currpenality=count_customers-curropen+currclose
+        if(currpenality<ans):
+            ans=currpenality
+            hour=len(customers)
+        return hour                
+
+
